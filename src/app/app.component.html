@@ -1,0 +1,96 @@
+<div class="main-div">
+  <form action='' [formGroup]="nestedForm" >
+
+  <mat-form-field appearance="fill" class="coupnType">
+    <mat-label>Coupon Type *</mat-label>
+    <mat-select formControlName="couponType">
+      <mat-option *ngFor="let coupon of couponArr" [value]="coupon.value">
+        {{coupon.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+     <input type="text" class="coupnCode" name="couponCode" placeholder="Coupon code *"
+        formControlName="couponCode">
+     <br/>
+
+     <div style="display: block;">
+    <mat-form-field class="date">
+      <input matInput [matDatepicker]="picker1" placeholder="Start Date *" formControlName="start">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 ></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="date ml-10">
+      <input matInput [matDatepicker]="picker2" placeholder="End Date *" formControlName="end">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 ></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="fill" style="display: block; width: 49%;">
+    <mat-label>Coupon Availability *</mat-label>
+    <mat-select formControlName="couponAvailabilitys">
+      <mat-option *ngFor="let val of couponAvailability" [value]="val.value">
+        {{val.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <textarea id="w3review" placeholder="Type Something" name="w3review" rows="4" cols="50" formControlName="textArea" style="display: block; width: 100%;">
+    </textarea>
+
+
+    <mat-form-field appearance="fill" style="display: block; width: 100%;">
+      <mat-label>Coupon Status</mat-label>
+      <mat-select formControlName="couponStatuss">
+        <mat-option *ngFor="let status of couponStatus" [value]="status.value">
+          {{status.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p class="couponRuleText">Coupon Rules</p>
+    <hr style="margin-bottom: 0px;">
+    <div class="row" formArrayName="rule">
+    <div *ngFor="let rule of ruleArray.controls;let i = index;" [formGroupName]="i" class="rule">
+      <div class="ruletext">
+      <span >Rule{{i+1}}</span>
+    </div>
+    <div class="amountDiv">
+      <input type="number" class="fortextbox" name="minAmount" placeholder="Min Amount *"
+        formControlName="minAmount">
+     <input type="number" class="fortextbox" name="maxAmount" placeholder="Max Amount "
+        formControlName="maxAmount">
+      </div>
+      <div class="amountDiv">
+        <mat-form-field appearance="fill" style="height: 48px; width: 45%;">
+          <mat-label>Discount Type</mat-label>
+          <mat-select formControlName="DiscountType">
+            <mat-option *ngFor="let discount of discountTypes" [value]="discount.value">
+              {{discount.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <input type="number" class="fortextbox" name="discountAmount" placeholder="Discount Amount *"
+        formControlName="discountAmount" style="height: 30px;
+        padding-top: 17px;">
+      </div>
+      <div class="amountDiv mb-20">
+        <input type="number" class="fortextbox" name="maxDiscountAmount" placeholder="Max Discount Amount "
+        formControlName="maxDiscountAmount">
+      </div>
+    </div>
+    </div>
+      <div (click)="addRule()" style="float: right;
+      display: block; margin-top: 15px;">
+        <img src="assets/add.png" style="height: 20px;
+        vertical-align: -4px;">
+        <span>Add More</span>
+      </div>
+
+      <button ngClass="save" (click)="submitHandler()" type="submit"> Save
+      </button>
+
+      <p style="color: Red; font-weight: 600; text-transform: uppercase"> Kindly check the final value in console.</p>
+  </form>
+
+</div>
